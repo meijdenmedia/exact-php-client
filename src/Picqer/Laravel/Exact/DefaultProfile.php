@@ -160,7 +160,7 @@ class DefaultProfile
      */
     public function getRemainingMinuteLimit()
     {
-        return Cache::get($this->limit_cache_name, 6);
+        return Cache::get($this->limit_cache_name, Connection::CALLS_LIMIT_PER_MINUTE);
     }
     
     /**
