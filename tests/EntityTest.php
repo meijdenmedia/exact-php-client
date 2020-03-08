@@ -1,17 +1,18 @@
 <?php
 
+namespace Picqer\Tests;
+
 use PHPUnit\Framework\TestCase;
 use Picqer\Financials\Exact\Connection;
 
 /**
- * Class EntityTest
+ * Class EntityTest.
  *
  * Tests all entities to ensure entities have no PHP parse errors and have
  * at least the properties we need to use the entity
  */
 class EntityTest extends TestCase
 {
-
     public function testAccountEntity()
     {
         $this->performEntityTest(\Picqer\Financials\Exact\Account::class);
@@ -253,6 +254,11 @@ class EntityTest extends TestCase
     public function testPurchaseOrderLineEntity()
     {
         $this->performEntityTest(\Picqer\Financials\Exact\PurchaseOrderLine::class);
+    }
+
+    public function testRevenueListEntity()
+    {
+        $this->performEntityTest(\Picqer\Financials\Exact\RevenueList::class);
     }
 
     public function testQuotationEntity()
@@ -615,9 +621,19 @@ class EntityTest extends TestCase
         $this->performEntityTest(\Picqer\Financials\Exact\ActiveEmployment::class);
     }
 
+    public function testOpportunity()
+    {
+        $this->performEntityTest(\Picqer\Financials\Exact\Opportunity::class);
+    }
+
+    public function testItemWarehouseStorageLocation()
+    {
+        $this->performEntityTest(\Picqer\Financials\Exact\ItemWarehouseStorageLocation::class);
+    }
+
     protected function performEntityTest($entityName)
     {
-        $reflectionClass = new ReflectionClass($entityName);
+        $reflectionClass = new \ReflectionClass($entityName);
 
         $this->assertTrue($reflectionClass->isInstantiable());
         $this->assertTrue($reflectionClass->hasProperty('fillable'));
@@ -625,5 +641,4 @@ class EntityTest extends TestCase
         $this->assertEquals('Picqer\Financials\Exact', $reflectionClass->getNamespaceName());
         $this->assertEquals('Picqer\Financials\Exact\Model', $reflectionClass->getParentClass()->getName());
     }
-
 }

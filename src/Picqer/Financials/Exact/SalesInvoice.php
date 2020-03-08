@@ -3,9 +3,8 @@
 namespace Picqer\Financials\Exact;
 
 /**
- * Class SalesInvoice
+ * Class SalesInvoice.
  *
- * @package Picqer\Financials\Exact
  * @see https://start.exactonline.nl/docs/HlpRestAPIResourcesDetails.aspx?name=SalesInvoiceSalesInvoices
  *
  * @property string $InvoiceID Primary key
@@ -68,6 +67,7 @@ namespace Picqer\Financials\Exact;
  * @property string $TypeDescription Description of the type
  * @property float $VATAmountDC Total VAT amount in the default currency of the company
  * @property float $VATAmountFC Total VAT amount in the currency of the transaction
+ * @property string $Warehouse Mandatory for direct sales invoice/credit note, cannot be set for normal sales invoice/credit note.
  * @property float $WithholdingTaxAmountFC Withholding tax amount applied to sales invoice
  * @property float $WithholdingTaxBaseAmount Withholding tax base amount to calculate withholding amount
  * @property float $WithholdingTaxPercentage Withholding tax percentage applied to sales invoice
@@ -75,7 +75,6 @@ namespace Picqer\Financials\Exact;
  */
 class SalesInvoice extends Model
 {
-
     use Query\Findable;
     use Persistance\Storable;
 
@@ -142,6 +141,7 @@ class SalesInvoice extends Model
         'TypeDescription',
         'VATAmountDC',
         'VATAmountFC',
+        'Warehouse',
         'WithholdingTaxAmountFC',
         'WithholdingTaxBaseAmount',
         'WithholdingTaxPercentage',
@@ -156,10 +156,12 @@ class SalesInvoice extends Model
      *
      * @return mixed
      */
-    public function getSalesInvoiceLines() {
-        if(array_key_exists('__deferred', $this->attributes['SalesInvoiceLines'])) {
+    public function getSalesInvoiceLines()
+    {
+        if (array_key_exists('__deferred', $this->attributes['SalesInvoiceLines'])) {
             $this->attributes['SalesInvoiceLines'] = (new SalesInvoiceLine($this->connection()))->filter("InvoiceID eq guid'{$this->InvoiceID}'");
         }
+
         return $this->attributes['SalesInvoiceLines'];
     }
 }

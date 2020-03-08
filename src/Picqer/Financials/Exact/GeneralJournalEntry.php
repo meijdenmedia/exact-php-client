@@ -3,9 +3,8 @@
 namespace Picqer\Financials\Exact;
 
 /**
- * Class GeneralJournalEntry
+ * Class GeneralJournalEntry.
  *
- * @package Picqer\Financials\Exact
  * @see https://start.exactonline.nl/docs/HlpRestAPIResourcesDetails.aspx?name=GeneralJournalEntryGeneralJournalEntries
  *
  * @property string $EntryID Primary key
@@ -14,7 +13,7 @@ namespace Picqer\Financials\Exact;
  * @property float $ExchangeRate Exchange rate
  * @property int $FinancialPeriod Financial period
  * @property int $FinancialYear Financial year
- * @property GeneralJournalEntryLines $GeneralJournalEntryLines Collection of lines
+ * @property GeneralJournalEntryLine[] $GeneralJournalEntryLines Collection of lines
  * @property string $JournalCode Code of Journal
  * @property bool $Reversal Indicates that amounts are reversed
  */
@@ -41,8 +40,8 @@ class GeneralJournalEntry extends Model
 
     public function addItem(array $array)
     {
-        if ( ! isset( $this->attributes['GeneralJournalEntryLines'] ) || $this->attributes['GeneralJournalEntryLines'] == null) {
-            $this->attributes['GeneralJournalEntryLines'] = [ ];
+        if (! isset($this->attributes['GeneralJournalEntryLines']) || $this->attributes['GeneralJournalEntryLines'] == null) {
+            $this->attributes['GeneralJournalEntryLines'] = [];
         }
         $this->attributes['GeneralJournalEntryLines'][] = $array;
     }

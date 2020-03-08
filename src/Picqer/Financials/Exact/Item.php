@@ -3,9 +3,8 @@
 namespace Picqer\Financials\Exact;
 
 /**
- * Class Item
+ * Class Item.
  *
- * @package Picqer\Financials\Exact
  * @see https://start.exactonline.nl/docs/HlpRestAPIResourcesDetails.aspx?name=logisticsItems
  *
  * @property string $Barcode Barcode of the item (numeric string)
@@ -90,6 +89,7 @@ namespace Picqer\Financials\Exact;
  * @property string $Modified Last modified date
  * @property string $Modifier User ID of modifier
  * @property string $ModifierFullName Name of modifier
+ * @property string $NetWeight Net Weight of the item
  * @property string $Notes Notes
  * @property string $SalesVatCode Code of SalesVat
  * @property string $SalesVatCodeDescription Description of SalesVatCode
@@ -107,7 +107,7 @@ class Item extends Model
     use Query\Findable;
     use Persistance\Storable;
     use Persistance\Downloadable;
-        
+
     protected $fillable = [
         'Barcode',
         'ID',
@@ -191,6 +191,7 @@ class Item extends Model
         'Modified',
         'Modifier',
         'ModifierFullName',
+        'NetWeight',
         'Notes',
         'SalesVatCode',
         'SalesVatCodeDescription',
